@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QueueDo · A To-Do List Powered by a Queue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>Queue<span>Do</span></h1>
+      <p>A to-do list built on a <strong>FIFO queue</strong>: first in, first out.</p>
+    </header>
+
+    <section class="card">
+      <form id="add-form" autocomplete="off">
+        <input id="task-input" type="text" maxlength="80" placeholder="What needs doing? e.g. Revise linked lists" />
+        <button type="submit" class="btn btn-enqueue">Enqueue ＋</button>
+      </form>
+
+      <div class="stats">
+        <div class="stat"><span class="label">size()</span><span id="stat-size" class="value">0</span></div>
+        <div class="stat"><span class="label">peek() · front</span><span id="stat-front" class="value">—</span></div>
+        <div class="stat"><span class="label">rear</span><span id="stat-rear" class="value">—</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Queue visualiser</h2>
+      <div class="tube-wrap">
+        <div class="tube-label out">⬅ DEQUEUE (front)</div>
+        <div id="tube" class="tube"></div>
+        <div class="tube-label in">ENQUEUE (rear) ➡</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="list-head">
+        <h2>Your tasks</h2>
+        <div class="actions">
+          <button id="btn-dequeue" class="btn btn-dequeue">Dequeue front ⏭</button>
+          <button id="btn-clear" class="btn btn-ghost">Clear all</button>
+        </div>
+      </div>
+      <ul id="task-list" class="task-list"></ul>
+      <p id="empty-msg" class="empty" hidden>The queue is empty. Enqueue something! 🎉</p>
+    </section>
+
+    <section class="card log-card">
+      <h2>Operation log</h2>
+      <ol id="log" class="log"></ol>
+      <p class="note">
+        Every change goes through the queue's own operations only (<code>enqueue</code>,
+        <code>dequeue</code>, <code>peek</code>). To check or remove a task in the middle, the app
+        dequeues every item and enqueues it back in the same order, skipping the removed one.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
